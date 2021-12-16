@@ -1,9 +1,15 @@
 import React from 'react';
 import Menu from './components/Menu';
 import { Routes, Route } from 'react-router-dom';
-import RedPage from './pages/RedPage';
-import BluePage from './pages/BluePage';
-import UsersPage from './pages/UsersPage';
+import loadable from '@loadable/component';
+
+// import RedPage from './pages/RedPage';
+// import BluePage from './pages/BluePage';
+// import UsersPage from './pages/UsersPage';
+
+const RedPage = loadable(() => import ('./pages/RedPage'));
+const BluePage = loadable(() => import('./pages/BluePage'));
+const UsersPage = loadable(() => import('./pages/UsersPage'));
 
 const App = () => {
   return (
