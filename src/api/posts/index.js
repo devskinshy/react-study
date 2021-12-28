@@ -1,10 +1,23 @@
-// const Router = require('koa-router');
-// const postsCtrl = require('./posts.ctrl');
-
 import Router from 'koa-router';
 import * as postsCtrl from './posts.ctrl.js';
+import checkLoggedIn from '../../lib/checkLoggedIn.js';
 
 const posts = new Router();
+
+posts.get('/', postsCtrl.list);
+posts.post('/', checkLoggedIn, postsCtrl.write);
+
+const post = new Router();
+post.get('/', postsCtrl.read);
+post.delete('/', checkLoggedIn, postsCtrl.checkOwnPost, postsCtrl.remove);
+post.patch('/', checkLoggedIn, postsCtrl.checkOwnPost, postsCtrl.update);
+
+posts.use('/:id', postsCtrl.getPostById, post.routes());
+
+export default posts;
+
+// const Router = require('koa-router');
+// const postsCtrl = require('./posts.ctrl');
 
 // const printInfo = (ctx) => {
 //   ctx.body = {
@@ -21,20 +34,9 @@ const posts = new Router();
 // posts.put('/:id', printInfo);
 // posts.patch('/:id', printInfo);
 
-posts.get('/', postsCtrl.list);
-posts.post('/', postsCtrl.write);
-
 // posts.get('/:id', postsCtrl.checkObjectId, postsCtrl.read);
 // posts.delete('/:id', postsCtrl.checkObjectId, postsCtrl.remove);
 // posts.patch('/:id', postsCtrl.checkObjectId, postsCtrl.update);
 // posts.put('/:id', postsCtrl.checkObjectId, postsCtrl.replace);
 
-const post = new Router();
-post.get('/', postsCtrl.read);
-post.delete('/', postsCtrl.remove);
-post.patch('/', postsCtrl.update);
-
-posts.use('/:id', postsCtrl.checkObjectId, post.routes());
-
 // module.exports = posts;
-export default posts;
