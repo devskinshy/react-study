@@ -60,7 +60,7 @@ const LoginForm = () => {
         console.log('localStorage is not working');
       }
     }
-  }, [user]);
+  }, [user, navigate]);
 
   return (
     <AuthForm
