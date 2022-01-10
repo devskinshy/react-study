@@ -7,9 +7,9 @@ import WriteActionButtonsContainer from '../containers/write/WriteActionButtonCo
 const WritePage = () => {
   return (
     <Responsive>
-      <EditorContainer/>
-      <TagBoxContainer/>
-      <WriteActionButtonsContainer/>
+      <EditorContainer onCHangeEdit/>
+      <TagBoxContainer onChnageTag/>
+      <WriteActionButtonsContainer onCommit/>
     </Responsive>
   );
 };

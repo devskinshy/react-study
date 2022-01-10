@@ -26,9 +26,7 @@ export function* writeSaga() {
 }
 
 const write = handleActions({
-  [INITIALIZE]: state => produce(state, draft => {
-    draft = initialState
-  }),
+  [INITIALIZE]: state => initialState,
   [CHANGE_FIELD]: (state, {payload: {key, value}}) => produce(state, draft => {
     draft[key] = value;
   }),
