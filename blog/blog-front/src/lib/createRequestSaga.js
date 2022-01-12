@@ -20,7 +20,6 @@ const createRequestSaga = (type, request) => {
     yield put(startLoading(type));
     try {
       const response = yield call(request, payload);
-      console.log(response);
       yield put(successAction(response));
     } catch (e) {
       yield put(failureAction(e))
